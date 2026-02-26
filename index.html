@@ -1,28 +1,64 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>UGHS Result 2025-2026</title>
-<style>
-body{font-family:Arial;text-align:center;background:#f2f2f2;}
-.box{background:white;padding:20px;margin:20px auto;width:95%;max-width:700px;}
-table{width:100%;border-collapse:collapse;margin-top:10px;}
-table,th,td{border:1px solid black;padding:8px;}
-button{padding:8px 12px;background:green;color:white;border:none;}
-input{padding:8px;width:60%;}
-</style>
-</head>
+<title>UGHS Examination Result 2025-2026</title>
 
+<style>
+body{
+font-family: "Times New Roman", serif;
+background:#f4f4f4;
+text-align:center;
+}
+
+.container{
+background:white;
+width:900px;
+margin:20px auto;
+padding:20px;
+border:2px solid black;
+}
+
+h2{
+margin-bottom:5px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+}
+
+table,th,td{
+border:1px solid black;
+padding:8px;
+}
+
+button{
+margin-top:20px;
+padding:10px 20px;
+background:black;
+color:white;
+border:none;
+cursor:pointer;
+}
+
+@media print{
+button{
+display:none;
+}
+}
+</style>
+
+</head>
 <body>
 
-<div class="box">
+<div class="container">
 
 <h2>UGHS EXAMINATION RESULT 2025-2026</h2>
+<p><b>District:</b> Gajapati</p>
+<p><b>Centre Name:</b> Koinpur</p>
 
-<p><b>District :</b> Gajapati</p>
-<p><b>Centre Name :</b> Koinpur</p>
-<p><b>Centre Code :</b> GK2025</p>
-
-<br>
+<hr>
 
 <input type="number" id="roll" placeholder="Enter Roll Number">
 <button onclick="searchResult()">Search</button>
@@ -56,24 +92,40 @@ if(students[roll]){
 
 var data = students[roll];
 var total = data.gk + data.math + data.english;
+var percent = (total/200)*100;
 var status = total >= 120 ? "PASS" : "FAIL";
+var division = "";
+
+if(percent >= 60){
+division = "First Division";
+}
+else if(percent >= 45){
+division = "Second Division";
+}
+else{
+division = "Third Division";
+}
 
 document.getElementById("result").innerHTML =
 
-"<h3>RESULT DETAILS</h3>" +
-"<p><b>Roll No :</b> " + roll + "</p>" +
-"<p><b>Name :</b> " + data.name + "</p>" +
+"<hr>" +
+"<h3>MARKSHEET</h3>" +
+"<p><b>Roll No:</b> " + roll + "</p>" +
+"<p><b>Name:</b> " + data.name + "</p>" +
 
 "<table>" +
-"<tr><th>Subject</th><th>Full Mark</th><th>Mark Secured</th></tr>" +
-"<tr><td>GK</td><td>70</td><td>"+data.gk+"</td></tr>" +
-"<tr><td>Math</td><td>70</td><td>"+data.math+"</td></tr>" +
-"<tr><td>English</td><td>60</td><td>"+data.english+"</td></tr>" +
+"<tr><th>Subject</th><th>Full Mark</th><th>Pass Mark</th><th>Mark Secured</th></tr>" +
+"<tr><td>GK</td><td>70</td><td>35</td><td>"+data.gk+"</td></tr>" +
+"<tr><td>Math</td><td>70</td><td>35</td><td>"+data.math+"</td></tr>" +
+"<tr><td>English</td><td>60</td><td>30</td><td>"+data.english+"</td></tr>" +
 "</table>" +
 
-"<p><b>Total :</b> " + total + " / 200</p>" +
-"<p><b>Pass Mark :</b> 120</p>" +
-"<p><b>Result Status :</b> " + status + "</p>";
+"<p><b>Total:</b> " + total + " / 200</p>" +
+"<p><b>Percentage:</b> " + percent.toFixed(2) + "%</p>" +
+"<p><b>Result:</b> " + status + "</p>" +
+"<p><b>Division:</b> " + division + "</p>" +
+
+"<button onclick='window.print()'>Print Result</button>";
 
 }
 else{
