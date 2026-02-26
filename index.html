@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>UGHS Result 2025-2026</title>
+<style>
+body{font-family:Arial;text-align:center;background:#f2f2f2;}
+.box{background:white;padding:20px;margin:20px auto;width:95%;max-width:700px;}
+table{width:100%;border-collapse:collapse;margin-top:10px;}
+table,th,td{border:1px solid black;padding:8px;}
+button{padding:8px 12px;background:green;color:white;border:none;}
+input{padding:8px;width:60%;}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+<h2>UGHS EXAMINATION RESULT 2025-2026</h2>
+
+<p><b>District :</b> Gajapati</p>
+<p><b>Centre Name :</b> Koinpur</p>
+<p><b>Centre Code :</b> GK2025</p>
+
+<br>
+
+<input type="number" id="roll" placeholder="Enter Roll Number">
+<button onclick="searchResult()">Search</button>
+
+<div id="result"></div>
+
+</div>
+
+<script>
+
+var students = {
+
+"20025":{name:"Umacharan Mandal",gk:40,math:42,english:41},
+"20026":{name:"Mikha Sabar",gk:38,math:45,english:39},
+"20028":{name:"Purna Chandra Sabar",gk:35,math:44,english:42},
+"20030":{name:"Debaraj Gamango",gk:45,math:47,english:43},
+"20031":{name:"Mamita Gamango",gk:41,math:46,english:38},
+"20032":{name:"Sanjaya Kumar Mandal",gk:39,math:43,english:40},
+"20033":{name:"Shanku Sabar",gk:36,math:42,english:41},
+"20034":{name:"Sanjeeba Mandal",gk:42,math:45,english:39},
+"20035":{name:"Stiphen Gamango",gk:37,math:44,english:40},
+"20037":{name:"Jagannath Gamango",gk:44,math:46,english:42}
+
+};
+
+function searchResult(){
+
+var roll = document.getElementById("roll").value.trim();
+
+if(students[roll]){
+
+var data = students[roll];
+var total = data.gk + data.math + data.english;
+var status = total >= 120 ? "PASS" : "FAIL";
+
+document.getElementById("result").innerHTML =
+
+"<h3>RESULT DETAILS</h3>" +
+"<p><b>Roll No :</b> " + roll + "</p>" +
+"<p><b>Name :</b> " + data.name + "</p>" +
+
+"<table>" +
+"<tr><th>Subject</th><th>Full Mark</th><th>Mark Secured</th></tr>" +
+"<tr><td>GK</td><td>70</td><td>"+data.gk+"</td></tr>" +
+"<tr><td>Math</td><td>70</td><td>"+data.math+"</td></tr>" +
+"<tr><td>English</td><td>60</td><td>"+data.english+"</td></tr>" +
+"</table>" +
+
+"<p><b>Total :</b> " + total + " / 200</p>" +
+"<p><b>Pass Mark :</b> 120</p>" +
+"<p><b>Result Status :</b> " + status + "</p>";
+
+}
+else{
+document.getElementById("result").innerHTML =
+"<h3 style='color:red;'>Result Not Found</h3>";
+}
+
+}
+
+</script>
+
+</body>
+</html>
