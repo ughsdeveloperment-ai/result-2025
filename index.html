@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>UGHS Examination Result 2025-2026</title>
+<title>UGHS Organisation Examination Result 2025-2026</title>
 
 <style>
 body{
-font-family: "Times New Roman", serif;
+font-family:"Times New Roman", serif;
 background:#f4f4f4;
 text-align:center;
 }
@@ -14,12 +14,21 @@ text-align:center;
 background:white;
 width:900px;
 margin:20px auto;
-padding:20px;
-border:2px solid black;
+padding:25px;
+border:3px solid black;
 }
 
-h2{
-margin-bottom:5px;
+input{
+padding:8px;
+width:220px;
+}
+
+button{
+padding:8px 15px;
+background:black;
+color:white;
+border:none;
+cursor:pointer;
 }
 
 table{
@@ -28,40 +37,41 @@ border-collapse:collapse;
 margin-top:20px;
 }
 
-table,th,td{
+th,td{
 border:1px solid black;
 padding:8px;
 }
 
-button{
-margin-top:20px;
-padding:10px 20px;
-background:black;
-color:white;
-border:none;
-cursor:pointer;
+th{
+background:#e6e6e6;
 }
 
 @media print{
-button{
+button,input{
 display:none;
 }
 }
 </style>
 
 </head>
+
 <body>
 
 <div class="container">
 
-<h2>UGHS EXAMINATION RESULT 2025-2026</h2>
+<h2>UGHS ORGANISATION EXAMINATION RESULT 2025-2026</h2>
+
 <p><b>District:</b> Gajapati</p>
 <p><b>Centre Name:</b> Koinpur</p>
 
 <hr>
 
-<input type="number" id="roll" placeholder="Enter Roll Number">
-<button onclick="searchResult()">Search</button>
+<h3>Enter Roll Number</h3>
+
+<input type="text" id="rollInput" placeholder="Roll Number">
+<br><br>
+
+<button onclick="searchResult()">Search Result</button>
 
 <div id="result"></div>
 
@@ -69,68 +79,133 @@ display:none;
 
 <script>
 
-var students = {
+var students={
 
-"20025":{name:"Umacharan Mandal",gk:40,math:42,english:41},
-"20026":{name:"Mikha Sabar",gk:38,math:45,english:39},
-"20028":{name:"Purna Chandra Sabar",gk:35,math:44,english:42},
-"20030":{name:"Debaraj Gamango",gk:45,math:47,english:43},
-"20031":{name:"Mamita Gamango",gk:41,math:46,english:38},
-"20032":{name:"Sanjaya Kumar Mandal",gk:39,math:43,english:40},
-"20033":{name:"Shanku Sabar",gk:36,math:42,english:41},
-"20034":{name:"Sanjeeba Mandal",gk:42,math:45,english:39},
-"20035":{name:"Stiphen Gamango",gk:37,math:44,english:40},
-"20037":{name:"Jagannath Gamango",gk:44,math:46,english:42}
+"20019":{name:"MUNA SABAR",gk:45,english:40,math:35},
+"20020":{name:"SUKUMANI SABAR",gk:44,english:38,math:36},
+"20021":{name:"LAXMINARAYAN SABAR",gk:46,english:42,math:38},
+"20023":{name:"SANTUNU SABAR",gk:43,english:39,math:36},
+"20024":{name:"ESWAR SABARA",gk:42,english:38,math:35},
+"20025":{name:"KAINA RAIKA",gk:40,english:36,math:34},
+"20026":{name:"PRASANTA SABAR",gk:48,english:44,math:40},
+"20027":{name:"CHAKRA SABAR",gk:41,english:37,math:34},
+"20028":{name:"SUDHAKAR SABAR",gk:49,english:45,math:42},
+"20029":{name:"LOKANATH SABAR",gk:44,english:40,math:36},
+"20030":{name:"RAMAKANTA SABAR",gk:45,english:41,math:38},
+"20031":{name:"MANOJ SANAPATTA BHUYAN",gk:50,english:45,math:42},
+"20032":{name:"JAYA DEV SABAR",gk:42,english:38,math:36},
+"20033":{name:"NABINA SABAR",gk:40,english:36,math:34},
+"20034":{name:"DEBENDRA BHUYAN",gk:46,english:42,math:38},
+"20035":{name:"PRAMILA SABAR",gk:43,english:39,math:36},
+"20036":{name:"KAILASH CHANDRA SABAR",gk:50,english:45,math:40},
+"20037":{name:"SUNITA SABAR",gk:42,english:38,math:35},
+"20038":{name:"RAIBATI GAMANGO",gk:40,english:36,math:34},
+"20039":{name:"GOPAL SABAR",gk:48,english:44,math:40},
+"20040":{name:"SUKANTA KUMAR SABAR",gk:47,english:43,math:38},
+"20041":{name:"BIDYA DHARA SABAR",gk:50,english:46,math:42},
+"20042":{name:"PRADEEP NAYAK",gk:44,english:40,math:36},
+"20043":{name:"SOMONATH BADO RAITA",gk:42,english:38,math:34},
+"20044":{name:"SIBARAM SABAR",gk:46,english:42,math:38},
+"20046":{name:"ABHIMANYU SABAR",gk:48,english:44,math:40},
+"20048":{name:"RINA SABAR",gk:42,english:38,math:34},
+"20049":{name:"MAMATA BADAMUNDI",gk:44,english:40,math:36},
+"20050":{name:"SARATA SABAR",gk:41,english:37,math:33},
+"20051":{name:"DILLESWARA RAUTO",gk:45,english:41,math:36}
 
 };
 
 function searchResult(){
 
-var roll = document.getElementById("roll").value.trim();
+var roll=document.getElementById("rollInput").value.trim();
+var s=students[roll];
 
-if(students[roll]){
+if(s){
 
-var data = students[roll];
-var total = data.gk + data.math + data.english;
-var percent = (total/200)*100;
-var status = total >= 120 ? "PASS" : "FAIL";
-var division = "";
+var total=s.gk+s.english+s.math;
+var percent=(total/200)*100;
+var status = total>=120 ? "PASS" : "FAIL";
+var division="";
 
-if(percent >= 60){
-division = "First Division";
-}
-else if(percent >= 45){
-division = "Second Division";
-}
-else{
-division = "Third Division";
+if(status=="PASS"){
+if(percent>=60) division="First Division";
+else if(percent>=45) division="Second Division";
+else division="Third Division";
+}else{
+division="---";
 }
 
-document.getElementById("result").innerHTML =
+document.getElementById("result").innerHTML=`
 
-"<hr>" +
-"<h3>MARKSHEET</h3>" +
-"<p><b>Roll No:</b> " + roll + "</p>" +
-"<p><b>Name:</b> " + data.name + "</p>" +
+<hr>
 
-"<table>" +
-"<tr><th>Subject</th><th>Full Mark</th><th>Pass Mark</th><th>Mark Secured</th></tr>" +
-"<tr><td>GK</td><td>70</td><td>35</td><td>"+data.gk+"</td></tr>" +
-"<tr><td>Math</td><td>70</td><td>35</td><td>"+data.math+"</td></tr>" +
-"<tr><td>English</td><td>60</td><td>30</td><td>"+data.english+"</td></tr>" +
-"</table>" +
+<h3>MARKSHEET</h3>
 
-"<p><b>Total:</b> " + total + " / 200</p>" +
-"<p><b>Percentage:</b> " + percent.toFixed(2) + "%</p>" +
-"<p><b>Result:</b> " + status + "</p>" +
-"<p><b>Division:</b> " + division + "</p>" +
+<p><b>Roll No:</b> ${roll}</p>
+<p><b>Name:</b> ${s.name}</p>
 
-"<button onclick='window.print()'>Print Result</button>";
+<table>
 
-}
-else{
-document.getElementById("result").innerHTML =
-"<h3 style='color:red;'>Result Not Found</h3>";
+<tr>
+<th>Subject</th>
+<th>Full Mark</th>
+<th>Pass Mark</th>
+<th>Mark Secured</th>
+</tr>
+
+<tr>
+<td>GK</td>
+<td>70</td>
+<td>35</td>
+<td>${s.gk}</td>
+</tr>
+
+<tr>
+<td>English</td>
+<td>60</td>
+<td>30</td>
+<td>${s.english}</td>
+</tr>
+
+<tr>
+<td>Math</td>
+<td>70</td>
+<td>35</td>
+<td>${s.math}</td>
+</tr>
+
+<tr>
+<th>Total</th>
+<th colspan="3">${total} / 200</th>
+</tr>
+
+<tr>
+<th>Percentage</th>
+<th colspan="3">${percent.toFixed(2)}%</th>
+</tr>
+
+<tr>
+<th>Result</th>
+<th colspan="3">${status}</th>
+</tr>
+
+<tr>
+<th>Division</th>
+<th colspan="3">${division}</th>
+</tr>
+
+</table>
+
+<br>
+
+<button onclick="window.print()">Print Result</button>
+
+`;
+
+}else{
+
+document.getElementById("result").innerHTML=
+"<h3 style='color:red'>Roll Number Not Found</h3>";
+
 }
 
 }
