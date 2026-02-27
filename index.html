@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>UGHS Organisation Examination Result 2025-2026</title>
-
+<title>UGHS Organisation Examination 2025</title>
 <style>
 body{
-font-family:"Times New Roman", serif;
-background:#f4f4f4;
+font-family:Arial;
+background:#f0f5ff;
 text-align:center;
 }
 
 .container{
 background:white;
-width:900px;
-margin:20px auto;
-padding:25px;
-border:3px solid black;
+width:95%;
+max-width:600px;
+margin:auto;
+margin-top:20px;
+padding:20px;
+border:4px solid #000080;
 }
 
 input{
@@ -25,7 +26,7 @@ width:220px;
 
 button{
 padding:8px 15px;
-background:black;
+background:#000080;
 color:white;
 border:none;
 cursor:pointer;
@@ -43,34 +44,23 @@ padding:8px;
 }
 
 th{
-background:#e6e6e6;
-}
-
-@media print{
-button,input{
-display:none;
-}
+background:#e6e6ff;
 }
 </style>
-
 </head>
 
 <body>
 
 <div class="container">
 
-<h2>UGHS ORGANISATION EXAMINATION RESULT 2025-2026</h2>
-
-<p><b>District:</b> Gajapati</p>
-<p><b>Centre Name:</b> Koinpur</p>
-
-<hr>
+<h2>UGHS Organisation Examination 2025</h2>
+<p>District : Gajapati</p>
+<p>Centre Code : 099882</p>
 
 <h3>Enter Roll Number</h3>
 
 <input type="text" id="rollInput" placeholder="Roll Number">
 <br><br>
-
 <button onclick="searchResult()">Search Result</button>
 
 <div id="result"></div>
@@ -122,89 +112,38 @@ var s=students[roll];
 if(s){
 
 var total=s.gk+s.english+s.math;
-var percent=(total/200)*100;
-var status = total>=120 ? "PASS" : "FAIL";
-var division="";
+var percent=(total/150)*100;
 
-if(status=="PASS"){
+var division="Third Division";
+
 if(percent>=60) division="First Division";
 else if(percent>=45) division="Second Division";
-else division="Third Division";
-}else{
-division="---";
-}
 
 document.getElementById("result").innerHTML=`
 
 <hr>
-
-<h3>MARKSHEET</h3>
-
-<p><b>Roll No:</b> ${roll}</p>
-<p><b>Name:</b> ${s.name}</p>
+<h3>${s.name}</h3>
 
 <table>
-
-<tr>
-<th>Subject</th>
-<th>Full Mark</th>
-<th>Pass Mark</th>
-<th>Mark Secured</th>
-</tr>
-
-<tr>
-<td>GK</td>
-<td>70</td>
-<td>35</td>
-<td>${s.gk}</td>
-</tr>
-
-<tr>
-<td>English</td>
-<td>60</td>
-<td>30</td>
-<td>${s.english}</td>
-</tr>
-
-<tr>
-<td>Math</td>
-<td>70</td>
-<td>35</td>
-<td>${s.math}</td>
-</tr>
-
-<tr>
-<th>Total</th>
-<th colspan="3">${total} / 200</th>
-</tr>
-
-<tr>
-<th>Percentage</th>
-<th colspan="3">${percent.toFixed(2)}%</th>
-</tr>
-
-<tr>
-<th>Result</th>
-<th colspan="3">${status}</th>
-</tr>
-
-<tr>
-<th>Division</th>
-<th colspan="3">${division}</th>
-</tr>
-
+<tr><th>Subject</th><th>Marks</th></tr>
+<tr><td>GK</td><td>${s.gk}</td></tr>
+<tr><td>English</td><td>${s.english}</td></tr>
+<tr><td>Math</td><td>${s.math}</td></tr>
+<tr><th>Total</th><th>${total}/150</th></tr>
+<tr><th>Percentage</th><th>${percent.toFixed(2)}%</th></tr>
+<tr><th>Division</th><th>${division}</th></tr>
+<tr><th>Result</th><th style="color:green">PASS</th></tr>
 </table>
 
 <br>
-
-<button onclick="window.print()">Print Result</button>
+<button onclick="window.print()" style="background:green;">Print Result</button>
 
 `;
 
 }else{
 
 document.getElementById("result").innerHTML=
-"<h3 style='color:red'>Roll Number Not Found</h3>";
+"<h3 style='color:red'>Result Not Found</h3>";
 
 }
 
