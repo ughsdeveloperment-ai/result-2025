@@ -2,141 +2,107 @@
 <html>
 <head>
 <title>UGHS Organisation Examination 2025</title>
-
 <style>
-body{
-font-family:Arial;
-background:#eef2ff;
-text-align:center;
-}
-
-.box{
-background:white;
-width:95%;
-max-width:600px;
-margin:auto;
-margin-top:30px;
-padding:20px;
-border:3px solid navy;
-}
-
-input{
-padding:8px;
-width:200px;
-}
-
-button{
-padding:8px 15px;
-background:navy;
-color:white;
-border:none;
-cursor:pointer;
-}
-
-table{
-width:100%;
-border-collapse:collapse;
-margin-top:20px;
-}
-
-th,td{
-border:1px solid black;
-padding:8px;
-}
-
-th{
-background:#dcdcff;
-}
+body{font-family:Arial;background:#eef2ff;text-align:center;}
+.box{background:white;width:95%;max-width:650px;margin:auto;margin-top:30px;padding:20px;border:3px solid navy;}
+input{padding:8px;width:200px;}
+button{padding:8px 15px;background:navy;color:white;border:none;cursor:pointer;}
+table{width:100%;border-collapse:collapse;margin-top:20px;}
+th,td{border:1px solid black;padding:8px;}
+th{background:#dcdcff;}
 </style>
 </head>
-
 <body>
 
 <div class="box">
-
 <h2>UGHS Organisation Examination 2025</h2>
-<p>District: Gajapati</p>
+<p>District : Gajapati</p>
 
 <input type="number" id="roll" placeholder="Enter Roll Number">
 <br><br>
 <button onclick="showResult()">Search Result</button>
 
 <div id="output"></div>
-
 </div>
 
 <script>
 
 const students = {
 
-20019:["MUNA SABAR",120],
-20020:["SUKUMANI SABAR",118],
-20021:["LAXMINARAYAN SABAR",130],
-20023:["SANTUNU SABAR",115],
-20024:["ESWAR SABARA",110],
-20025:["KAINA RAIKA",105],
-20026:["PRASANTA SABAR",140],
-20027:["CHAKRA SABAR",108],
-20028:["SUDHAKAR SABAR",150],
-20029:["LOKANATH SABAR",120],
-20030:["RAMAKANTA SABAR",125],
-20031:["MANOJ SANAPATTA BHUYAN",155],
-20032:["JAYA DEV SABAR",112],
-20033:["NABINA SABAR",100],
-20034:["DEBENDRA BHUYAN",130],
-20035:["PRAMILA SABAR",115],
-20036:["KAILASH CHANDRA SABAR",150],
-20037:["SUNITA SABAR",110],
-20038:["RAIBATI GAMANGO",105],
-20039:["GOPAL SABAR",140],
-20040:["SUKANTA KUMAR SABAR",138],
-20041:["BIDYA DHARA SABAR",160],
-20042:["PRADEEP NAYAK",120],
-20043:["SOMONATH BADO RAITA",110],
-20044:["SIBARAM SABAR",130],
-20046:["ABHIMANYU SABAR",145],
-20048:["RINA SABAR",108],
-20049:["MAMATA BADAMUNDI",120],
-20050:["SARATA SABAR",100],
-20051:["DILLESWARA RAUTO",125]
+20019:["MUNA SABAR",40,42,38],
+20020:["SUKUMANI SABAR",35,40,45],
+20021:["LAXMINARAYAN SABAR",45,40,38],
+20023:["SANTUNU SABAR",38,37,42],
+20024:["ESWAR SABARA",42,39,40],
+20025:["KAINA RAIKA",36,38,41],
+20026:["PRASANTA SABAR",44,40,39],
+20027:["CHAKRA SABAR",35,36,42],
+20028:["SUDHAKAR SABAR",40,39,38],
+20029:["LOKANATH SABAR",45,42,37],
+20030:["RAMAKANTA SABAR",41,40,38],
+20031:["MANOJ SANAPATTA BHUYAN",36,39,41],
+20032:["JAYA DEV SABAR",44,38,39],
+20033:["NABINA SABAR",39,40,38],
+20034:["DEBENDRA BHUYAN",45,40,39],
+20035:["PRAMILA SABAR",38,39,41],
+20036:["KAILASH CHANDRA SABAR",44,40,38],
+20037:["SUNITA SABAR",40,39,37],
+20038:["RAIBATI GAMANGO",36,38,40],
+20039:["GOPAL SABAR",39,40,38],
+20040:["SUKANTA KUMAR SABAR",45,41,38],
+20041:["BIDYA DHARA SABAR",37,38,40],
+20042:["PRADEEP NAYAK",42,39,38],
+20043:["SOMONATH BADO RAITA",36,37,41],
+20044:["SIBARAM SABAR",40,39,38],
+20046:["ABHIMANYU SABAR",45,40,38],
+20048:["RINA SABAR",38,39,41],
+20049:["MAMATA BADAMUNDI",40,38,39],
+20050:["SARATA SABAR",42,39,38],
+20051:["DILLESWARA RAUTO",44,40,39]
 
 };
 
 function showResult(){
 
-let roll = document.getElementById("roll").value;
-let data = students[roll];
+let roll=document.getElementById("roll").value;
+let data=students[roll];
 
 if(data){
 
-let name = data[0];
-let total = data[1];
-let percent = (total/200)*100;
+let name=data[0];
+let gk=data[1];
+let eng=data[2];
+let math=data[3];
+
+let total=gk+eng+math;
+let percent=(total/200)*100;
 
 let division="Third Division";
 if(percent>=60) division="First Division";
 else if(percent>=45) division="Second Division";
 
 document.getElementById("output").innerHTML=`
+
 <hr>
 <h3>${name}</h3>
 
 <table>
-<tr><th>Total Marks</th><th>${total} / 200</th></tr>
+<tr><th>GK</th><td>${gk}</td></tr>
+<tr><th>English</th><td>${eng}</td></tr>
+<tr><th>Math</th><td>${math}</td></tr>
+
+<tr><th>Total</th><th>${total} / 200</th></tr>
 <tr><th>Percentage</th><th>${percent.toFixed(2)}%</th></tr>
 <tr><th>Division</th><th>${division}</th></tr>
-<tr><th>Result</th><th style="color:green">PASS</th></tr>
+<tr><th>Result</th><th style="color:green;">PASS</th></tr>
 </table>
 
 <br>
-<button onclick="window.print()" style="background:green;">Print</button>
+<button onclick="window.print()" style="background:green;">Print Result</button>
 `;
 
 }else{
-
-document.getElementById("output").innerHTML=
-"<h3 style='color:red'>Result Not Found</h3>";
-
+document.getElementById("output").innerHTML="<h3 style='color:red'>Result Not Found</h3>";
 }
 
 }
