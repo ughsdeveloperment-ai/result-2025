@@ -2,31 +2,32 @@
 <html>
 <head>
 <title>UGHS Organisation Examination 2025</title>
+
 <style>
 body{
 font-family:Arial;
-background:#f0f5ff;
+background:#eef2ff;
 text-align:center;
 }
 
-.container{
+.box{
 background:white;
 width:95%;
 max-width:600px;
 margin:auto;
-margin-top:20px;
+margin-top:30px;
 padding:20px;
-border:4px solid #000080;
+border:3px solid navy;
 }
 
 input{
 padding:8px;
-width:220px;
+width:200px;
 }
 
 button{
 padding:8px 15px;
-background:#000080;
+background:navy;
 color:white;
 border:none;
 cursor:pointer;
@@ -44,105 +45,96 @@ padding:8px;
 }
 
 th{
-background:#e6e6ff;
+background:#dcdcff;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="box">
 
 <h2>UGHS Organisation Examination 2025</h2>
-<p>District : Gajapati</p>
-<p>Centre Code : 099882</p>
+<p>District: Gajapati</p>
 
-<h3>Enter Roll Number</h3>
-
-<input type="text" id="rollInput" placeholder="Roll Number">
+<input type="number" id="roll" placeholder="Enter Roll Number">
 <br><br>
-<button onclick="searchResult()">Search Result</button>
+<button onclick="showResult()">Search Result</button>
 
-<div id="result"></div>
+<div id="output"></div>
 
 </div>
 
 <script>
 
-var students={
+const students = {
 
-"20019":{name:"MUNA SABAR",gk:45,english:40,math:35},
-"20020":{name:"SUKUMANI SABAR",gk:44,english:38,math:36},
-"20021":{name:"LAXMINARAYAN SABAR",gk:46,english:42,math:38},
-"20023":{name:"SANTUNU SABAR",gk:43,english:39,math:36},
-"20024":{name:"ESWAR SABARA",gk:42,english:38,math:35},
-"20025":{name:"KAINA RAIKA",gk:40,english:36,math:34},
-"20026":{name:"PRASANTA SABAR",gk:48,english:44,math:40},
-"20027":{name:"CHAKRA SABAR",gk:41,english:37,math:34},
-"20028":{name:"SUDHAKAR SABAR",gk:49,english:45,math:42},
-"20029":{name:"LOKANATH SABAR",gk:44,english:40,math:36},
-"20030":{name:"RAMAKANTA SABAR",gk:45,english:41,math:38},
-"20031":{name:"MANOJ SANAPATTA BHUYAN",gk:50,english:45,math:42},
-"20032":{name:"JAYA DEV SABAR",gk:42,english:38,math:36},
-"20033":{name:"NABINA SABAR",gk:40,english:36,math:34},
-"20034":{name:"DEBENDRA BHUYAN",gk:46,english:42,math:38},
-"20035":{name:"PRAMILA SABAR",gk:43,english:39,math:36},
-"20036":{name:"KAILASH CHANDRA SABAR",gk:50,english:45,math:40},
-"20037":{name:"SUNITA SABAR",gk:42,english:38,math:35},
-"20038":{name:"RAIBATI GAMANGO",gk:40,english:36,math:34},
-"20039":{name:"GOPAL SABAR",gk:48,english:44,math:40},
-"20040":{name:"SUKANTA KUMAR SABAR",gk:47,english:43,math:38},
-"20041":{name:"BIDYA DHARA SABAR",gk:50,english:46,math:42},
-"20042":{name:"PRADEEP NAYAK",gk:44,english:40,math:36},
-"20043":{name:"SOMONATH BADO RAITA",gk:42,english:38,math:34},
-"20044":{name:"SIBARAM SABAR",gk:46,english:42,math:38},
-"20046":{name:"ABHIMANYU SABAR",gk:48,english:44,math:40},
-"20048":{name:"RINA SABAR",gk:42,english:38,math:34},
-"20049":{name:"MAMATA BADAMUNDI",gk:44,english:40,math:36},
-"20050":{name:"SARATA SABAR",gk:41,english:37,math:33},
-"20051":{name:"DILLESWARA RAUTO",gk:45,english:41,math:36}
+20019:["MUNA SABAR",120],
+20020:["SUKUMANI SABAR",118],
+20021:["LAXMINARAYAN SABAR",130],
+20023:["SANTUNU SABAR",115],
+20024:["ESWAR SABARA",110],
+20025:["KAINA RAIKA",105],
+20026:["PRASANTA SABAR",140],
+20027:["CHAKRA SABAR",108],
+20028:["SUDHAKAR SABAR",150],
+20029:["LOKANATH SABAR",120],
+20030:["RAMAKANTA SABAR",125],
+20031:["MANOJ SANAPATTA BHUYAN",155],
+20032:["JAYA DEV SABAR",112],
+20033:["NABINA SABAR",100],
+20034:["DEBENDRA BHUYAN",130],
+20035:["PRAMILA SABAR",115],
+20036:["KAILASH CHANDRA SABAR",150],
+20037:["SUNITA SABAR",110],
+20038:["RAIBATI GAMANGO",105],
+20039:["GOPAL SABAR",140],
+20040:["SUKANTA KUMAR SABAR",138],
+20041:["BIDYA DHARA SABAR",160],
+20042:["PRADEEP NAYAK",120],
+20043:["SOMONATH BADO RAITA",110],
+20044:["SIBARAM SABAR",130],
+20046:["ABHIMANYU SABAR",145],
+20048:["RINA SABAR",108],
+20049:["MAMATA BADAMUNDI",120],
+20050:["SARATA SABAR",100],
+20051:["DILLESWARA RAUTO",125]
 
 };
 
-function searchResult(){
+function showResult(){
 
-var roll=document.getElementById("rollInput").value.trim();
-var s=students[roll];
+let roll = document.getElementById("roll").value;
+let data = students[roll];
 
-if(s){
+if(data){
 
-var total=s.gk+s.english+s.math;
-var percent=(total/150)*100;
+let name = data[0];
+let total = data[1];
+let percent = (total/200)*100;
 
-var division="Third Division";
-
+let division="Third Division";
 if(percent>=60) division="First Division";
 else if(percent>=45) division="Second Division";
 
-document.getElementById("result").innerHTML=`
-
+document.getElementById("output").innerHTML=`
 <hr>
-<h3>${s.name}</h3>
+<h3>${name}</h3>
 
 <table>
-<tr><th>Subject</th><th>Marks</th></tr>
-<tr><td>GK</td><td>${s.gk}</td></tr>
-<tr><td>English</td><td>${s.english}</td></tr>
-<tr><td>Math</td><td>${s.math}</td></tr>
-<tr><th>Total</th><th>${total}/150</th></tr>
+<tr><th>Total Marks</th><th>${total} / 200</th></tr>
 <tr><th>Percentage</th><th>${percent.toFixed(2)}%</th></tr>
 <tr><th>Division</th><th>${division}</th></tr>
 <tr><th>Result</th><th style="color:green">PASS</th></tr>
 </table>
 
 <br>
-<button onclick="window.print()" style="background:green;">Print Result</button>
-
+<button onclick="window.print()" style="background:green;">Print</button>
 `;
 
 }else{
 
-document.getElementById("result").innerHTML=
+document.getElementById("output").innerHTML=
 "<h3 style='color:red'>Result Not Found</h3>";
 
 }
